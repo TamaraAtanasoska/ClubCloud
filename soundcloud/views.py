@@ -36,8 +36,16 @@ def get_soundcloud_artists(request):
 def get_soundcloud_favorites(request):
 
     user = request.user
-    soundcloud_user = UserSocialAuth.objects.filter(user__id=user.id)
-    soundcloud_user_id = soundcloud_user[0].uid
+
+    return HttpResponse(get_user_favorites(user))
+
+
+def get_user_favorites(user):
+    try:
+        soundcloud_user = UserSocialAuth.objects.get(user__id=user.id)
+    except UserSocialAuth.DoesNotExist:
+        return []
+    soundcloud_user_id = soundcloud_user.uid
     token = SOCIAL_AUTH_SOUNDCLOUD_KEY
 
     url = 'http://api.soundcloud.com/users/' + soundcloud_user_id + '/favorites.json?client_id=' + token
@@ -53,11 +61,11 @@ def get_soundcloud_favorites(request):
                         'track_is_downloadable':favorite['downloadable'],
                         'track_downloads':favorite['download_count'],
                         'track_playings':favorite['playback_count'],
-                        'user_id': favorite['user']['id'],   
-                        'user_username': favorite['user']['username'],   
-                        'user_image_url': favorite['user']['avatar_url'],   
-                        'user_link_to_profile': favorite['user']['uri'],   
-                        'user_permalink': favorite['user']['permalink'],   
+                        'genre': favorite['genre'],
+                        'user_id': favorite['user']['id'],
+                        'user_username': favorite['user']['username'],
+                        'user_image_url': favorite['user']['avatar_url'],
+                        'user_link_to_profile': favorite['user']['uri'],
+                        'user_permalink': favorite['user']['permalink'],
                       })
-    return HttpResponse(soundcloud_data)
-
+        return favorites

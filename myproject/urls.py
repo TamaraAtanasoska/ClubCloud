@@ -6,6 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^callback/$', 'myproject.views.callback'),
     url(r'^geo/$', 'myproject.views.geo'),
+    url(r'^where_to_go/$', 'myproject.views.get_my_favorite_venues'),
     # url(r'^$', 'myproject.views.home', name='home'),
     # url(r'^myproject/', include('myproject.foo.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),

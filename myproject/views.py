@@ -3,6 +3,8 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 from django.http.response import HttpResponse
+from events import get_events, get_tips
+from soundcloud.views import get_user_favorites
 
 def callback(request):
     return render_to_response('callback.html')
@@ -17,4 +19,19 @@ def geo(request):
 
 
 
+@login_required
+@csrf_exempt
+def get_my_favorite_venues(request):
+    # TODO check no session
+    events = get_events(lat=request.session['lat'], lng=request.session['lng'])
+    favorites = get_user_favorites(request.user)
+    pass
 
+
+def match_user_events(favorites, events):
+    # TODO optimize
+    favorite_events = []
+    for favorite in favorites:
+        for event in events:
+            if favorite['user_username'] in event['participants']:
+                favorite_events.append()

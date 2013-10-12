@@ -15,6 +15,5 @@ def geo(request):
         request.session['lng'] = request.POST['lng']
     return render_to_response('geo.html', {'lat': request.session.get('lat', ''), 'lng': request.session.get('lng', '')})
 
-
-
-
+def home(request):
+    return render_to_response('home.html', {})

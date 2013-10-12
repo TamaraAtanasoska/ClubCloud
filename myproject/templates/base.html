@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!--<link rel="stylesheet" href="{% static "css/clubcloud.css" %}" />-->
+       <title>{% block title %}ClubCloud{% endblock %}</title>
+   </head>
+
+   <body>
+       <div id="content">
+           {% block content %}{% endblock %}
+       </div>
+   </body>
+   <script src="{% static "js/jquery.min.js" %}"></script>
+   {% block extra_js %}{% endblock %}
+</html>

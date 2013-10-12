@@ -16,12 +16,23 @@ venues_search_params.update(
     {'categoryId': '4bf58dd8d48988d11f941735'})
 
 
-def get_events():
+def get_events(lat=None, lng=None, address=None):
+    if (not lat or not lng) and not address:
+        raise Exception("NO ADDRESS provided")
+    if lat and lng:
+        location = {'ll': str(lat) + ',' + str(lng)}
+    else:
+        location = {'near': address}
+    venues_search_params.update(location)
     resp = requests.get(venue_search, params=venues_search_params)
     response = resp.json()['response']
     venues_with_events = [vn for vn in  response['venues'] if vn.get('events')]
     events = []
+
     for venue_with_event in venues_with_events:
+        if not venue_with_event['events'].get('items'):
+            print "skipping event: %s" % venue_with_event['events']
+            continue
         events.append({
             'participants': [pt['participant']['displayName'] for pt in venue_with_event['events']['items'][0]['participants']],
             'venue_name':  venue_with_event['name'],

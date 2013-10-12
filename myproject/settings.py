@@ -139,7 +139,7 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 SOCIAL_AUTH_SOUNDCLOUD_KEY = 'c1a434d5b7fe99a3d734dc00547dc7cf'
 SOCIAL_AUTH_SOUNDCLOUD_SECRET = '76b8b54a637af9b3971848a6fd663127'
 
-#SOCIAL_AUTH_SOUNDCLOUD_SCOPE = [...]
+#SOCIAL_AUTH_SOUNDCLOUD_SCOPE = []
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -150,7 +150,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'social.apps.django_app.default'
+    'social.apps.django_app.default',
+    'myproject',
+    'soundcloud'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

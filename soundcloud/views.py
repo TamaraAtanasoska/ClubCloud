@@ -29,7 +29,7 @@ def get_soundcloud_artists(request):
                         'link_to_profile':artist['uri'],
                       })
     
-    return HttpResponse(artists)
+    return HttpResponse(soundcloud_data)
 
 @login_required
 @csrf_exempt
@@ -47,13 +47,17 @@ def get_soundcloud_favorites(request):
     favorites = []
     for favorite in soundcloud_data:
         favorites.append({
-                        'id':favorite['id'],
-                        'track_title': favorite['title'],   
+                        'track_id':favorite['id'],
+                        'track_title': favorite['title'],
+                        'track_favorites':favorite['favoritings_count'],
+                        'track_is_downloadable':favorite['downloadable'],
+                        'track_downloads':favorite['download_count'],
+                        'track_playings':favorite['playback_count'],
                         'user_id': favorite['user']['id'],   
                         'user_username': favorite['user']['username'],   
                         'user_image_url': favorite['user']['avatar_url'],   
                         'user_link_to_profile': favorite['user']['uri'],   
                         'user_permalink': favorite['user']['permalink'],   
                       })
-    return HttpResponse(favorites)
+    return HttpResponse(soundcloud_data)
 

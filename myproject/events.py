@@ -37,8 +37,19 @@ def get_events(lat=None, lng=None, address=None):
             'participants': [pt['participant']['displayName'] for pt in venue_with_event['events']['items'][0]['participants']],
             'venue_name':  venue_with_event['name'],
             # 'summary': venue_with_event['events']['summary'],
+            'id': venue_with_event['id'],
             'event_name' : venue_with_event['events']['items'][0]['name'],
             'lng': venue_with_event['location']['lng'],
             'lat': venue_with_event['location']['lat'],
         })
     return events
+
+
+def get_tips(venue_id):
+    # venue_id = '4ae778a5f964a520a5ab21e3'
+    venue_tips = "https://api.foursquare.com/v2/venues/" + str(venue_id) + "/tips"
+    resp = requests.get(venue_tips, params=params)
+    tips_json = resp.json()
+    return tips_json['response']['tips']['items']
+# TODO get venue by name
+# 

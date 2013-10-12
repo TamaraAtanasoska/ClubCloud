@@ -3,16 +3,15 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import requests
-from social_auth.models import UserSocialAuth
+from social.apps.django_app.default.models import UserSocialAuth
 from myproject.settings import SOCIAL_AUTH_SOUNDCLOUD_KEY 
 
 @login_required
 @csrf_exempt
-def get_soundcloud_data(request):
+def get_soundcloud_artists(request):
 
     user = request.user
     soundcloud_user = UserSocialAuth.objects.filter(user__id=user.id)
-    print(soundcloud_user)
     soundcloud_user_id = soundcloud_user[0].uid
     token = SOCIAL_AUTH_SOUNDCLOUD_KEY
 
@@ -23,16 +22,38 @@ def get_soundcloud_data(request):
     artists = []
     for artist in soundcloud_data:
         artists.append({
-                        'name': artist['username'],   
+                        'id':artist['id'],
+                        'username': artist['username'],   
+                        'full_name': artist['full_name'],   
                         'image_url':artist['avatar_url'],
                         'link_to_profile':artist['uri'],
-
                       })
-    username_all = [value for item in soundcloud_data for (key,value) in item.items() if key == 'username'] 
     
+    return HttpResponse(artists)
 
-    print(len(soundcloud_data))
+@login_required
+@csrf_exempt
+def get_soundcloud_favorites(request):
 
+    user = request.user
+    soundcloud_user = UserSocialAuth.objects.filter(user__id=user.id)
+    soundcloud_user_id = soundcloud_user[0].uid
+    token = SOCIAL_AUTH_SOUNDCLOUD_KEY
 
-    
-    return HttpResponse(soundcloud_data[0].items())
+    url = 'http://api.soundcloud.com/users/' + soundcloud_user_id + '/favorites.json?client_id=' + token
+
+    request_soundcloud = requests.get(url)
+    soundcloud_data = request_soundcloud.json()
+    favorites = []
+    for favorite in soundcloud_data:
+        favorites.append({
+                        'id':favorite['id'],
+                        'track_title': favorite['title'],   
+                        'user_id': favorite['user']['id'],   
+                        'user_username': favorite['user']['username'],   
+                        'user_image_url': favorite['user']['avatar_url'],   
+                        'user_link_to_profile': favorite['user']['uri'],   
+                        'user_permalink': favorite['user']['permalink'],   
+                      })
+    return HttpResponse(favorites)
+

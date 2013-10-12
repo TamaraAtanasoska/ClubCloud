@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events for you</title>
+</head>
+<body>
+{% for event in events %}
+    <p>Event: {{ event.user_username }}</p>
+    <p>Venue: {{  event.venue_name }}</p>
+    <p>Genre: {{ event.genre }}</p>
+    --------------------------------------------------------
+{% endfor %}
+</body>
+</html>

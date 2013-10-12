@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+import random
 
 from django.http.response import HttpResponse
 from events import get_events, get_tips
@@ -35,21 +36,37 @@ def get_my_favorite_venues(request):
 
     events = get_events(lat=lat, lng=lng)
     favorites = get_user_favorites(request.user)
-    return HttpResponse(match_user_events(favorites, events))
+    matching_events = match_user_events(favorites, events)
+    return render_to_response('yourevents.html', {'events': matching_events})
 
 
 def match_user_events(favorites, events):
     # TODO optimize
-    favorite_events = []
-    if MOCK_MATCHING:
-        num_of_mock_events = int(len(events)/3.0)
-        # matching_
+    matching_events = []
 
+    favorites = [favorite for favorite in favorites if favorite['genre'] and favorite['user_username']]
+    artists = set([])
+
+    uniq_per_artist = []
     for favorite in favorites:
-        for event in events:
-            if favorite['user_username'] in event['participants']:
-                favorite_events.append()
-    return favorite_events
+        if favorite['user_username'] not in artists:
+            uniq_per_artist.append(favorite)
+            artists.add(favorite['user_username'])
+    if MOCK_MATCHING:
+        num_of_mock_events = 5
+        num_of_mock_events = len(events) if num_of_mock_events > len(events) else num_of_mock_events
+        match_events = random.sample(events, num_of_mock_events)
+        matching_events = []
+        for event, favorite in zip(match_events, uniq_per_artist):
+            event.update(favorite)
+            matching_events.append(event)
+    else:
+        for favorite in uniq_per_artist:
+            for event in events:
+                if favorite['user_username'] in event['participants']:
+                    event.update(favorite)
+                    matching_events.append(event)
+    return matching_events
 
 
 def home(request):

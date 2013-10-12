@@ -68,4 +68,4 @@ def get_user_favorites(user):
                         'user_link_to_profile': favorite['user']['uri'],
                         'user_permalink': favorite['user']['permalink'],
                       })
-        return favorites
+    return favorites

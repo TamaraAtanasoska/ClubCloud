@@ -17,8 +17,6 @@ def geo(request):
         request.session['lng'] = request.POST['lng']
     return render_to_response('geo.html', {'lat': request.session.get('lat', ''), 'lng': request.session.get('lng', '')})
 
-
-
 @login_required
 @csrf_exempt
 def get_my_favorite_venues(request):
@@ -35,3 +33,7 @@ def match_user_events(favorites, events):
         for event in events:
             if favorite['user_username'] in event['participants']:
                 favorite_events.append()
+
+
+def home(request):
+    return render_to_response('home.html', {})

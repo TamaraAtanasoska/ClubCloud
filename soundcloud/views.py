@@ -20,11 +20,19 @@ def get_soundcloud_data(request):
 
     request_soundcloud = requests.get(url)
     soundcloud_data = request_soundcloud.json()
-    #artists_all
+    artists = []
+    for artist in soundcloud_data:
+        artists.append({
+                        'name': artist['username'],   
+                        'image_url':artist['avatar_url'],
+                        'link_to_profile':artist['uri'],
+
+                      })
+    username_all = [value for item in soundcloud_data for (key,value) in item.items() if key == 'username'] 
     
 
-    print(soundcloud_data)
+    print(len(soundcloud_data))
 
 
     
-    return HttpResponse(soundcloud_data)
+    return HttpResponse(soundcloud_data[0].items())

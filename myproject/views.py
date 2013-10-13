@@ -97,3 +97,12 @@ def match_artist_event(participants, artist):
 def detail(request):
     return render_to_response('detail.html', {})
 
+def location(request):
+    return render_to_response('location.html', {})
+def livefeed(request):
+    return render_to_response('livefeed.html', {})
+def listen(request):
+    return render_to_response('listen.html', {})
+def atmoshphere(request):
+    return render_to_response('atmosphere.html', {})
+

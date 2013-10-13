@@ -1,16 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Events for you</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Events for you{% endblock %}
+{% block main-content %}i
+<style type="text/css">
+.inner {
+  position: absolute;
+}
+.borders {
+border-width: 1px;
+   border-bottom-width:1px;
+   border-bottom-color:White;
+   border-bottom-style: solid;
+   width: 90%;
+   margin: 0 auto;
+}
+.orange{
+color: #f47820;
+}
+.white{
+color: white;
+}
+.borders div{
+    display: inline-block;
+}
+.borders div .image {
+  padding-bottom: 50px;
+}
+</style>
+
 {% for event in events %}
-    <p>Event: {{ event.user_username }}</p>
-    <p>Venue: {{  event.venue_name }}</p>
-    <p>Genre: {{ event.genre }}</p>
-    <p>Distance: {{ event.distance }} km</p>
-    <p>Track id: {{ event.track_url }}</p>
-    --------------------------------------------------------
+<div class="borders">
+    <div><img class="image" src="{{ event.user_image_url }}" alt="artist-image"/></div>
+    <div>
+    <p class="orange"> {{ event.user_username }}@{{  event.venue_name }}</p>
+    <p class="white">{{ event.genre }}</p>
+    <p class="white">{{ event.distance }} km</p>
+    </div>
+</div>
 {% endfor %}
-</body>
-</html>
+{% endblock %}
+{% block footer %}
+{% endblock %}

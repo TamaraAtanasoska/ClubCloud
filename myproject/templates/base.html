@@ -9,13 +9,7 @@
     <link href="{% static "css/clubcloud.css" %}" rel="stylesheet" media="screen">
 
   </head>
-  <body  style=" 
-  background: url('/static/images/photo-3.png') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-">
+  <body  style="{% block body_background %}background: #303030{% endblock %}"> 
     <section class="content">
 	{% block header %}{% endblock %}
 	{% block main-content %}

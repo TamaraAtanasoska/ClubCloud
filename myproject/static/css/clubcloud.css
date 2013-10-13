@@ -1,5 +1,8 @@
 // Required by bootstrap
-body { padding-bottom: 70px; }
+body { 
+   padding-bottom: 70px; 
+   background-color:  #303030;
+}
 
 footer nav {
    position: absolute;

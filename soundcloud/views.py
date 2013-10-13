@@ -74,7 +74,23 @@ def get_user_favorites(user):
 @csrf_exempt
 def eyeem_images(request):
 
-        
+    request_soundcloud = requests.get(url)
+    soundcloud_data = request_soundcloud.json()
+    artists = []
+    for artist in soundcloud_data:
+        artists.append({
+                        'id':artist['id'],
+                        'username': artist['username'],   
+                        'full_name': artist['full_name'],   
+                        'image_url':artist['avatar_url'],
+                        'link_to_profile':artist['uri'],
+                      })
+    
+    return HttpResponse(soundcloud_data)
+
+@login_required
+@csrf_exempt
+def gigatools_gigs(request):
 
     request_soundcloud = requests.get(url)
     soundcloud_data = request_soundcloud.json()
@@ -89,3 +105,4 @@ def eyeem_images(request):
                       })
     
     return HttpResponse(soundcloud_data)
+

@@ -49,6 +49,15 @@ MOCK_EVENTS = [
             'lng': '13.445209340768438',
             'lat': '52.501070081112715',
     },
+        {
+            'participants': ['peter schumann'],
+            'venue_name':  'Kater Holzig',
+            # 'summary': venue_with_event['events']['summary'],
+            'id': '4de4fe5d18385df2b060e808',
+            'event_name' : 'peter schumann',
+            'lng': '13.423147201538086',
+            'lat': '52.511284744669304',
+    },
 ]
 
 def explore_events(lat=None, lng=None, address=None):

@@ -25,15 +25,29 @@ color: white;
 .borders div .image {
   padding-bottom: 50px;
 }
+.icon-bar{
+width:32px;
+}
+.icon-container{
+border: 1px solid white;
+border-radius: 5px;
+padding: 4px 0;
+}
 </style>
 
 {% for event in events %}
 <div class="borders">
     <div><img class="image" src="{{ event.user_image_url }}" alt="artist-image"/></div>
     <div>
-    <p class="orange"> {{ event.user_username }}@{{  event.venue_name }}</p>
-    <p class="white">{{ event.genre }}</p>
-    <p class="white">{{ event.distance }} km</p>
+    <p class="orange"> {{ event.user_username|upper }}@{{  event.venue_name }}</p>
+    <p class="white"><img class="icon-bar" src="/static/icons/icons-28.png" alt="distance"/>{{ event.distance }} km</p>
+    <p class="white"><img class="icon-bar" src="/static/icons/note-icon_small.png" style="width:25px; padding:4px;" alt="genre"/>{{ event.genre }} </p>
+    <span>
+    <span class="icon-container"><img class="icon-bar" src="/static/icons/icons-18.png" alt="listen"/></span>
+    <span class="icon-container"><img class="icon-bar" src="/static/icons/icons-21.png" alt="listen"/></span>
+    <span class="icon-container"><img class="icon-bar" src="/static/icons/icons-24.png" alt="listen"/></span>
+    <span class="icon-container"><img class="icon-bar" src="/static/icons/icons-27.png" alt="listen"/></span>
+    </span>
     </div>
 </div>
 {% endfor %}

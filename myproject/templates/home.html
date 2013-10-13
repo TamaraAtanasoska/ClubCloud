@@ -1,19 +1,76 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block content %}
-<footer class="fixed_down">
-   <div class="row">
-      <nav class="col-md-12 col-xs-12">
-          <ul class="row col-md-12 col-xs-12">
-            <li class="col-md-3 col-xs-3"><a href="#">One</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Two</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Thee</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Four</a></li>
-          </ul>
-      </nav>
-   </div>
-</footer>
+{% block body_background %}
+  background: url('/static/images/photo-3.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 {% endblock %}
 
-{% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}
+{% block header %}
+<nav class="header">
+   <ul>
+      <li>HOME</li>
+      <li>APP</li>
+      <li>PROFILE</li>
+      <li>MUSIC</li>
+      <li>FAQ</li>
+   </ul>
+</nav>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-content">
+   <div class="container">
+      <div class="info">
+         <img src="{% static "images/transparent-surface_home-screen.png" %}">
+      </div>
+      <div class="login">
+         <span class="soundcloud-btn">
+            <a href="/login/soundcloud/">CONNECT WITH</a>
+            <img src="{% static "images/sound-cloud-logo.png" %}">
+         </span>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+   <script src="{% static "js/geolocation.js" %}"></script>
+    <script>
+	$('.headphones').click(function(e){
+		e.preventDefault();
+      $('.info img').attr('src', '/static/images/headphones_transparent.png');
+      $('.headphones').find('img').attr('src', '/static/images/icons-18.png');
+      $('.heart').find('img').attr('src', '/static/images/icons-22.png');
+      $('.bubble').find('img').attr('src', '/static/images/icons-25.png');
+      $('.pin').find('img').attr('src', '/static/images/icons-28.png');
+	});
+	$('.heart').click(function(e){
+		e.preventDefault();
+      $('.info img').attr('src', '/static/images/heart_transparent.png');
+      $('.headphones').find('img').attr('src', '/static/images/icons-19.png');
+      $('.heart').find('img').attr('src', '/static/images/icons-21.png');
+      $('.bubble').find('img').attr('src', '/static/images/icons-25.png');
+      $('.pin').find('img').attr('src', '/static/images/icons-28.png');
+	});
+	$('.bubble').click(function(e){
+		e.preventDefault();
+      $('.info img').attr('src', '/static/images/speech-bubble-transparent.png');
+      $('.headphones').find('img').attr('src', '/static/images/icons-19.png');
+      $('.heart').find('img').attr('src', '/static/images/icons-22.png');
+      $('.bubble').find('img').attr('src', '/static/images/icons-24.png');
+      $('.pin').find('img').attr('src', '/static/images/icons-28.png');
+	});
+	$('.pin').click(function(e){
+		e.preventDefault();
+      $('.info img').attr('src', '/static/images/location-transparent.png');
+      $('.headphones').find('img').attr('src', '/static/images/icons-19.png');
+      $('.heart').find('img').attr('src', '/static/images/icons-22.png');
+      $('.bubble').find('img').attr('src', '/static/images/icons-25.png');
+      $('.pin').find('img').attr('src', '/static/images/icons-27.png');
+	});
+    </script>
+{% endblock %}

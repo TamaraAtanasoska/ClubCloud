@@ -1,4 +1,5 @@
 import requests
+from django.http import HttpResponse
 
 
 venue_search = 'https://api.foursquare.com/v2/venues/search'
@@ -98,4 +99,15 @@ def get_tips(venue_id):
 # TODO get venue by name
 #
 
-
+def get_photos(venue_id):
+    venue_id = '4ae778a5f964a520a5ab21e3'
+    venue_photos = "https://api.foursquare.com/v2/venues/" + str(venue_id) + "/photos"
+    resp = requests.get(venue_photos, params=params)
+    photos_json = resp.json()
+    photos = photos_json['response']['photos']['items']
+    url = []
+    for photo_urls in photos:
+        url.append(photo_urls['prefix'] + '/width' + str(photo_urls['width']) + photo_urls['suffix'])
+        
+    return HttpResponse(url)
+ 

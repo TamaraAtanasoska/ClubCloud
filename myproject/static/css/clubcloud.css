@@ -1,0 +1,29 @@
+// Required by bootstrap
+body { 
+   padding-bottom: 70px; 
+   /*background-color: #303030 !important;*/
+}
+
+footer.fixed_down {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   padding: 15px 0 10px 0;
+   border: 1px solid #c0c0c0;
+}
+
+footer nav ul {
+   list-style-type: none;
+}
+
+footer nav ul li {
+   display: inline;
+   width: 25%;
+   text-align: center;
+   padding: 2px 0;
+   border-left: 1px solid #c0c0c0;
+}
+
+footer nav ul li:first-child {
+   border: none;
+}

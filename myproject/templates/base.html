@@ -1,41 +1,37 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <title>{% block title %}ClubCloud{% endblock %}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="{% static "css/themes/ClubCloud.min.css" %}" />
-      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
-      <!--<link rel="stylesheet" href="{% static "css/clubcloud.css" %}" />-->
-      <script src="{% static "js/jquery.min.js" %}"></script>
-      <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-   </head>
+  <head>
+    <title>{% block title %}ClubCloud{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "css/clubcloud.css" %}" rel="stylesheet" media="screen">
 
-   <body>
-      <div data-role="page">
-         <div data-role="header" data-theme="a">
-            {% block header %}
-            {% endblock %}
-         </div>
-         <div data-role="content" data-theme="a">
-            {% block content %}
-            {% endblock %}
-         </div>
-         <div data-role="footer" data-theme="a">
-            {% block footer %}
-               <div data-role="footer" style="overflow:hidden;">
-                  <div data-role="navbar">
-                     <ul>
-                        <li><a href="#" id="headphones" data-icon="custom">One</a></li>
-                        <li><a href="#" id="heart" data-icon="custom">Two</a></li>
-                        <li><a href="#" id="bubble" data-icon="custom">Three</a></li>
-                        <li><a href="#" id="pin" data-icon="custom">Four</a></li>
-                     </ul>
-                  </div>
-               </div>
-            {% endblock %}
-         </div>
-      </div>
-   </body>
-   {% block extra_js %}{% endblock %}
+  </head>
+  <body style="background: #303030;">
+    <section class="content">
+	{% block main-content %}
+	{% endblock %}
+	{% block footer %}
+	<footer class="fixed_down">
+	   <div class="row">
+	      <nav class="col-md-12 col-xs-12">
+		  <ul class="row col-md-12 col-xs-12">
+		    <li class="col-md-3 col-xs-3"><a href="#">One</a></li>
+		    <li class="col-md-3 col-xs-3"><a href="#">Two</a></li>
+		    <li class="col-md-3 col-xs-3"><a href="#">Thee</a></li>
+		    <li class="col-md-3 col-xs-3"><a href="#">Four</a></li>
+		  </ul>
+	      </nav>
+	   </div>
+	</footer>
+	{% endblock %}
+    </section>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>

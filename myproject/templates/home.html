@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block content %}Hello,world!{% endblock %}
+{% block content %}
+<footer class="fixed_down">
+   <div class="row">
+      <nav class="col-md-12 col-xs-12">
+          <ul class="row col-md-12 col-xs-12">
+            <li class="col-md-3 col-xs-3"><a href="#">One</a></li>
+            <li class="col-md-3 col-xs-3"><a href="#">Two</a></li>
+            <li class="col-md-3 col-xs-3"><a href="#">Thee</a></li>
+            <li class="col-md-3 col-xs-3"><a href="#">Four</a></li>
+          </ul>
+      </nav>
+   </div>
+</footer>
+{% endblock %}
 
 {% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}

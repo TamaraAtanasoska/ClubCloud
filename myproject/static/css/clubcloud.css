@@ -1,7 +1,7 @@
 // Required by bootstrap
 body { 
    padding-bottom: 70px; 
-   background-color:  #303030;
+   /*background-color: #303030 !important;*/
 }
 
 footer.fixed_down {

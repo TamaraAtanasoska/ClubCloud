@@ -152,7 +152,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'social.apps.django_app.default',
     'myproject',
-    'soundcloud'
+    'soundcloud_connect'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

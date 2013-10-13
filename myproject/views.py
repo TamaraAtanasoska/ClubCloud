@@ -7,11 +7,11 @@ import json
 
 from django.http.response import HttpResponse
 from events import get_events, get_tips
-from soundcloud.views import get_user_favorites
+from soundcloud_connect.views import get_user_favorites
 
 MOCK_LOCATION = True
 MOCK_MATCHING = False
-MOCK_FAVORITES = True
+MOCK_FAVORITES = False
 
 
 def callback(request):
@@ -37,7 +37,7 @@ def get_my_favorite_venues(request):
         lng=request.session['lng']
 
     events = get_events(lat=lat, lng=lng)
-    if MOCK_FAVORITES:
+    if not MOCK_FAVORITES:
         favorites = get_user_favorites(request.user)
 
         with open("favorites.json", "w") as f:
@@ -75,6 +75,12 @@ def match_user_events(favorites, events):
                 if match_artist_event(event['participants'], favorite['user_username']):
                     event.update(favorite)
                     matching_events.append(event)
+    distance = 1.5
+    for event in matching_events:
+        if not event['genre']:
+            event['genre']  = 'Techno'
+        event['distance'] = str(distance)
+        distance += 0.2
     return matching_events
 
 

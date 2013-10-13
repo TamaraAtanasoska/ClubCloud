@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Events for you{% endblock %}
-{% block main-content %}i
+{% block extra_style %}
 <style type="text/css">
 .inner {
   position: absolute;
@@ -34,6 +33,9 @@ border-radius: 5px;
 padding: 4px 0;
 }
 </style>
+{% endblock %}
+{% block title %}Events for you{% endblock %}
+{% block main-content %}
 
 {% for event in events %}
 <div class="borders">

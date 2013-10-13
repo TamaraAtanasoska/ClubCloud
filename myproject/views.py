@@ -93,3 +93,7 @@ def match_artist_event(participants, artist):
         if p.lower() in artist.lower() or artist.lower() in p.lower():
             return True
     return False
+
+def detail(request):
+    return render_to_response('detail.html', {})
+

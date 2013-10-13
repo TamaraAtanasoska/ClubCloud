@@ -77,3 +77,39 @@ footer nav ul li img {
 .soundcloud-btn img {
    width: 75px;
 }
+
+.events {
+   list-style-type: none;
+}
+ul.events {
+   padding: 0;
+}
+
+li.event {
+   margin: 15px;
+   border-bottom: 1px solid white;
+   padding-bottom: 15px;
+}
+.event .name {color: #f47820; }
+.event .artist_picture {
+   float: left;
+}
+
+.event p { padding: 0; margin: 0;}
+
+.event_data {
+   margin-left: 115px;
+   margin-top: -10px;
+}
+.small-icon { width: 32px; }
+.event_data .gender img { width: 15px; margin: 0 8px; }
+.event_data .gender { margin-bottom: 8px;}
+
+.icon-container{
+border: 1px solid white;
+border-radius: 5px;
+padding: 4px 0;
+}
+.icon-bar{
+width:32px;
+}

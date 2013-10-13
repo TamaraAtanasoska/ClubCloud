@@ -1,57 +1,25 @@
 {% extends "base.html" %}
 {% block extra_style %}
-<style type="text/css">
-.inner {
-  position: absolute;
-}
-.borders {
-border-width: 1px;
-   border-bottom-width:1px;
-   border-bottom-color:White;
-   border-bottom-style: solid;
-   width: 90%;
-   margin: 0 auto;
-}
-.orange{
-color: #f47820;
-}
-.white{
-color: white;
-}
-.borders div{
-    display: inline-block;
-}
-.borders div .image {
-  padding-bottom: 50px;
-}
-.icon-bar{
-width:32px;
-}
-.icon-container{
-border: 1px solid white;
-border-radius: 5px;
-padding: 4px 0;
-}
-</style>
 {% endblock %}
 {% block title %}Events for you{% endblock %}
 {% block main-content %}
 
+<ul class="events">
 {% for event in events %}
-<div class="borders">
-    <div><img class="image" src="{{ event.user_image_url }}" alt="artist-image"/></div>
-    <div>
-    <p class="orange"> {{ event.user_username|upper }}@{{  event.venue_name }}</p>
-    <p class="white"><img class="icon-bar" src="/static/icons/icons-28.png" alt="distance"/>{{ event.distance }} km</p>
-    <p class="white"><img class="icon-bar" src="/static/icons/note-icon_small.png" style="width:25px; padding:4px;" alt="genre"/>{{ event.genre }} </p>
-    <span>
-    <span class="icon-container"><a href="listen/"><img class="icon-bar" src="/static/icons/icons-18.png" alt="listen"/></a></span>
-    <span class="icon-container"><a href="atmosphere/"><img class="icon-bar" src="/static/icons/icons-21.png" alt="listen"/></a></span>
-    <span class="icon-container"><a href="livefeed/"><img class="icon-bar" src="/static/icons/icons-24.png" alt="listen"/></a></span>
-    <span class="icon-container"><a href="location/"><img class="icon-bar" src="/static/icons/icons-27.png" alt="listen"/></a></span>
-    </span>
+<li class="event clearfix">
+    <span class="clearfix artist_picture"><img class="image" src="{{ event.user_image_url }}" alt="artist-image"/></span>
+    <div class="event_data">
+      <p class="name"> {{ event.user_username|upper }}@{{  event.venue_name }}</p>
+      <p class="location"><img class="small-icon" src="/static/icons/icons-28.png" alt="distance"/>{{ event.distance }} km</p>
+      <p class="gender"><img class="small-icon" src="/static/icons/note-icon_small.png" alt="genre"/>{{ event.genre }} </p>
+      <p>
+       <span class="icon-container"><a href="listen/"><img class="icon-bar" src="/static/icons/icons-18.png" alt="listen"/></a></span>
+       <span class="icon-container"><a href="atmosphere/"><img class="icon-bar" src="/static/icons/icons-21.png" alt="listen"/></a></span>
+       <span class="icon-container"><a href="livefeed/"><img class="icon-bar" src="/static/icons/icons-24.png" alt="listen"/></a></span>
+       <span class="icon-container"><a href="location/"><img class="icon-bar" src="/static/icons/icons-27.png" alt="listen"/></a></span>
+      </p>
     </div>
-</div>
+</li>
 {% endfor %}
 {% endblock %}
 {% block footer %}

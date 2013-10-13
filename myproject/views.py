@@ -103,6 +103,6 @@ def livefeed(request):
     return render_to_response('livefeed.html', {})
 def listen(request):
     return render_to_response('listen.html', {})
-def atmoshphere(request):
+def atmosphere(request):
     return render_to_response('atmosphere.html', {})
 

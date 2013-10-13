@@ -3,13 +3,15 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import random
+import json
 
 from django.http.response import HttpResponse
 from events import get_events, get_tips
 from soundcloud.views import get_user_favorites
 
 MOCK_LOCATION = True
-MOCK_MATCHING = True
+MOCK_MATCHING = False
+MOCK_FAVORITES = True
 
 
 def callback(request):
@@ -35,7 +37,14 @@ def get_my_favorite_venues(request):
         lng=request.session['lng']
 
     events = get_events(lat=lat, lng=lng)
-    favorites = get_user_favorites(request.user)
+    if MOCK_FAVORITES:
+        favorites = get_user_favorites(request.user)
+
+        with open("favorites.json", "w") as f:
+            json.dump(favorites, f)
+    else:
+        with open("favorites.json") as f:
+            favorites = json.load(f)
     matching_events = match_user_events(favorites, events)
     return render_to_response('yourevents.html', {'events': matching_events})
 
@@ -44,7 +53,7 @@ def match_user_events(favorites, events):
     # TODO optimize
     matching_events = []
 
-    favorites = [favorite for favorite in favorites if favorite['genre'] and favorite['user_username']]
+    #favorites = [favorite for favorite in favorites_orig if favorite['genre'] and favorite['user_username']]
     artists = set([])
 
     uniq_per_artist = []
@@ -63,7 +72,7 @@ def match_user_events(favorites, events):
     else:
         for favorite in uniq_per_artist:
             for event in events:
-                if favorite['user_username'] in event['participants']:
+                if match_artist_event(event['participants'], favorite['user_username']):
                     event.update(favorite)
                     matching_events.append(event)
     return matching_events
@@ -71,3 +80,10 @@ def match_user_events(favorites, events):
 
 def home(request):
     return render_to_response('home.html', {})
+
+
+def match_artist_event(participants, artist):
+    for p in participants:
+        if p.lower() in artist.lower() or artist.lower() in p.lower():
+            return True
+    return False

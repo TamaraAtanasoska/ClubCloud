@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 import requests
 from social.apps.django_app.default.models import UserSocialAuth
 from myproject.settings import SOCIAL_AUTH_SOUNDCLOUD_KEY
-import soundcloud
 
 @login_required
 @csrf_exempt
@@ -36,17 +35,8 @@ def get_soundcloud_artists(request):
 @login_required
 @csrf_exempt
 def get_track(request):
-    permalink = request.GET.get('link')
-    permalink = "http://soundcloud.com/forss/flickermood"
-    if not permalink:
-        return HttpResponse("Please provide song link")
-    user = request.user
-
-    client = soundcloud.Client(client_id=SOCIAL_AUTH_SOUNDCLOUD_KEY)
-
-    embed_info = client.get('/oembed', url=permalink)
-
-    return render_to_response({'embed_player': embed_info['html']})
+    track_id = request.GET.get('track_id', '547928')
+    return render_to_response("play.html", {'track_id': track_id})
 
 
 @login_required
@@ -71,7 +61,6 @@ def get_user_favorites(user):
     request_soundcloud = requests.get(url)
     soundcloud_data = request_soundcloud.json()
     favorites = []
-
     for favorite in soundcloud_data:
         favorites.append({
                         'track_id':favorite['id'],

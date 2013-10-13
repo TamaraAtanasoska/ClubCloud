@@ -4,10 +4,12 @@ body {
    background-color:  #303030;
 }
 
-footer nav {
+footer.fixed_down {
    position: absolute;
    bottom: 0;
    width: 100%;
+   padding: 15px 0 10px 0;
+   border: 1px solid #c0c0c0;
 }
 
 footer nav ul {
@@ -17,5 +19,11 @@ footer nav ul {
 footer nav ul li {
    display: inline;
    width: 25%;
-   text-align: center
+   text-align: center;
+   padding: 2px 0;
+   border-left: 1px solid #c0c0c0;
+}
+
+footer nav ul li:first-child {
+   border: none;
 }

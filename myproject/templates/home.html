@@ -1,19 +1,40 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block content %}
-<footer class="fixed_down">
-   <div class="row">
-      <nav class="col-md-12 col-xs-12">
-          <ul class="row col-md-12 col-xs-12">
-            <li class="col-md-3 col-xs-3"><a href="#">One</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Two</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Thee</a></li>
-            <li class="col-md-3 col-xs-3"><a href="#">Four</a></li>
-          </ul>
-      </nav>
+{% block body_background %}
+  background: url('/static/images/photo-3.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+{% endblock %}
+
+{% block header %}
+<nav class="header">
+   <ul>
+      <li>HOME</li>
+      <li>APP</li>
+      <li>PROFILE</li>
+      <li>MUSIC</li>
+      <li>FAQ</li>
+   </ul>
+</nav>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-content">
+   <div class="container">
+      <div class="info">
+         <img src="{% static "images/transparent-surface_home-screen.png" %}">
+      </div>
+      <div class="login">
+         <span class="soundcloud-btn">
+            <a href="#">CONNECT WITH</a>
+            <img src="{% static "images/sound-cloud-logo.png" %}">
+         </span>
+      </div>
    </div>
-</footer>
+</div>
 {% endblock %}
 
 {% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}

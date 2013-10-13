@@ -10,7 +10,7 @@ section.content {
    color: white;
 }
 
-.content a { color: white; }
+.content a { text-decoration: none; color: white; }
 
 .content .header{
    padding: 60px 0;
